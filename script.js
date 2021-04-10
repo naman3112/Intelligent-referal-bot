@@ -1,12 +1,16 @@
 const pup = require("puppeteer");
 let tab;
 let brow;
-let id = "chaynika.arora6@gmail.com";
-let pass = "chaynikaa1854";
+// let id = "chaynika.arora6@gmail.com";
+// let pass = "chaynikaa1854";
+
 // let challenges = require("./data");
+let id ="namanarora311@gmail.com";
+let pass = "HARICHAND@123"
+
 var fs = require('fs');
 var setCookies=[];
- setCookies = require('./foo');
+ setCookies = require('./fooNaman');
 
 async function type(selector, input, tab) {
   for (let i = 0; i < input.length; i++) {
@@ -41,8 +45,9 @@ for(let i=0;i<setCookies.length;i++){
   
 
 await tab.goto("https://www.linkedin.com/feed/");
+// first time login page for new user 
 
-  //await tab.goto("https://www.linkedin.com/login");
+//   await tab.goto("https://www.linkedin.com/login");
 
 //   await type("#username", id, tab);
 //   await letsWait();
@@ -54,7 +59,7 @@ await tab.goto("https://www.linkedin.com/feed/");
 // console.log('these are the cookies of the current page ' ,cookiePage);
 
 // await letsWait();
-// fs.writeFileSync("foo.js", JSON.stringify(cookiePage));
+// fs.writeFileSync("fooNaman.js", JSON.stringify(cookiePage));
 await letsWait();
 await tab.waitForSelector(".search-global-typeahead__input.always-show-placeholder",{visible:true});
 await letsWait();
@@ -63,9 +68,9 @@ await letsWait();
 //searching the required organisation 
 await tab.keyboard.press("Enter");
 
-
+await letsWait();
 //9 tab clicks are needed to get to the people tab 
-for(let i=0;i<10;i++){
+for(let i=0;i<9;i++){
     await tab.keyboard.press("Tab");
     await letsWait();
 }
@@ -85,11 +90,13 @@ for(let i=0;i<6;i++){
     await tab.keyboard.press("Tab");
     await letsWait();
 }
-await tab.waitForSelector (".artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view",{visible:true});
-let allMessageButtons = await tab.$$(".artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view")
+// now sending messages to the recruiters 
+
+await tab.waitForSelector (".entity-result__actions.entity-result__divider button",{visible:true});
+let allMessageButtons = await tab.$$(".entity-result__actions.entity-result__divider button")
 await letsWait();
 for(let i=0;i<allMessageButtons.length;i++ ){
-    await tab.click(".artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view")
+    await allMessageButtons[i].click();
     await letsWait();
 }
 
