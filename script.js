@@ -4,81 +4,101 @@ let brow;
 let id = "xekoy82720@tlhao86.com";
 let pass = "HARICHAND@123";
 // let challenges = require("./data");
+var fs = require('fs');
 
-
-async function type(selector,input,tab){
-    for (let i =0;i<input.length;i++){
-         let rando= Math.floor((Math.random() * 1000) + 200);   
-        await tab.type(selector,input[i],{delay : rando});
-    }
+async function type(selector, input, tab) {
+  for (let i = 0; i < input.length; i++) {
+    let rando = Math.floor(Math.random() * 1000 + 200);
+    await tab.type(selector, input[i], { delay: rando });
+  }
 }
-async function letsWait(){
-    return new Promise((res,rej)=>{
-        setTimeout(()=>{
-              res(); 
-        },200)
-    })
-}
+async function letsWait() {
+  let rando = Math.floor(Math.random() * 1000 + 200);
 
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res();
+    }, rando);
+  });
+}
 
 async function main() {
-    let browser = await pup.launch({
-        headless: false,
-        defaultViewport: false,
-        args: ["--start-maximized"]
-    });
+  let browser = await pup.launch({
+    headless: false,
+    defaultViewport: false,
+    args: ["--start-maximized"],
+  });
 
-let pages = await browser.pages();
-   
-    let tab = pages[0];
-    await tab.goto("https://www.linkedin.com/login");
-    
-    await type('#username',id,tab);
-    letsWait();
-    await type('#password',pass,tab);
-        
-    // await tab.type("#input-1", id);
+  let pages = await browser.pages();
 
+  let tab = pages[0];
+  await tab.goto("https://www.linkedin.com/login");
 
-    // for(let i=0;i<id.length;i++){
-    //      let rando =    
+  await type("#username", id, tab);
+  await letsWait();
+  await type("#password", pass, tab);
+  await letsWait();
+await tab.click(".btn__primary--large.from__button--floating")
 
-    // }
+let cookiePage = tab.cookies();
+console.log('these are the cookies of the current page ' ,cookiePage);
 
+await letsWait();
+fs.writeFileSync("foo.js", JSON.stringify(cookiePage));
+await letsWait();
 
-    // await tab.type("#input-2", pass);
-    // await tab.click(".ui-btn.ui-btn-large.ui-btn-primary.auth-button.ui-btn-styled");
-    // await tab.waitForNavigation({waitUntil: "networkidle2"});
-    // await tab.click(".dropdown-handle.nav_link.toggle-wrap");
-    // await tab.click("a[data-analytics='NavBarProfileDropDownAdministration']");
-    // await tab.waitForSelector(".nav-tabs.nav.admin-tabbed-nav li", {visible: true});
-    // let linkLists = await tab.$$(".nav-tabs.nav.admin-tabbed-nav li");
-    // await linkLists[1].click();
-    // await tab.waitForSelector(".btn.btn-green.backbone.pull-right", {visible: true});
-    // let createChallengeButton = await tab.$(".btn.btn-green.backbone.pull-right");
-    // let createChallengeUrl = await tab.evaluate(function(ele){
-    //     return ele.getAttribute("href");
-    // },createChallengeButton);
-    // for(let i = 0; i < challenges.length; i++) {
-    //     await createChallenge("https://www.hackerrank.com" + createChallengeUrl,challenges[i],await browser.newPage() );
-    // }
-    
+  // await tab.type("#input-1", id);
 
+  // for(let i=0;i<id.length;i++){
+  //      let rando =
+
+  // }
+
+  // await tab.type("#input-2", pass);
+  // await tab.click(".ui-btn.ui-btn-large.ui-btn-primary.auth-button.ui-btn-styled");
+  // await tab.waitForNavigation({waitUntil: "networkidle2"});
+  // await tab.click(".dropdown-handle.nav_link.toggle-wrap");
+  // await tab.click("a[data-analytics='NavBarProfileDropDownAdministration']");
+  // await tab.waitForSelector(".nav-tabs.nav.admin-tabbed-nav li", {visible: true});
+  // let linkLists = await tab.$$(".nav-tabs.nav.admin-tabbed-nav li");
+  // await linkLists[1].click();
+  // await tab.waitForSelector(".btn.btn-green.backbone.pull-right", {visible: true});
+  // let createChallengeButton = await tab.$(".btn.btn-green.backbone.pull-right");
+  // let createChallengeUrl = await tab.evaluate(function(ele){
+  //     return ele.getAttribute("href");
+  // },createChallengeButton);
+  // for(let i = 0; i < challenges.length; i++) {
+  //     await createChallenge("https://www.hackerrank.com" + createChallengeUrl,challenges[i],await browser.newPage() );
+  // }
 }
 
-async function createChallenge(url,challenge,tab) {
-    await tab.goto(url);
-    await tab.waitForSelector("#name",{visible: true});
-    await tab.type("#name",challenge["Challenge Name"]);
-    await tab.type("#preview",challenge["Description"]);
-    await tab.waitForSelector("#problem_statement-container .CodeMirror textarea",{visible: true});
-    await tab.type("#problem_statement-container .CodeMirror textarea", challenge["Problem Statement"]);
-    await tab.type("#input_format-container .CodeMirror textarea", challenge["Input Format"]);
-    await tab.type("#constraints-container .CodeMirror textarea", challenge["Constraints"]);
-    await tab.type("#output_format-container .CodeMirror textarea", challenge["Output Format"]);
-    await tab.type("#tags_tag",challenge["Tags"]);
-    await tab.keyboard.press("Enter");
-    await tab.click(".save-challenge.btn.btn-green");
-
+async function createChallenge(url, challenge, tab) {
+  await tab.goto(url);
+  await tab.waitForSelector("#name", { visible: true });
+  await tab.type("#name", challenge["Challenge Name"]);
+  await tab.type("#preview", challenge["Description"]);
+  await tab.waitForSelector(
+    "#problem_statement-container .CodeMirror textarea",
+    { visible: true }
+  );
+  await tab.type(
+    "#problem_statement-container .CodeMirror textarea",
+    challenge["Problem Statement"]
+  );
+  await tab.type(
+    "#input_format-container .CodeMirror textarea",
+    challenge["Input Format"]
+  );
+  await tab.type(
+    "#constraints-container .CodeMirror textarea",
+    challenge["Constraints"]
+  );
+  await tab.type(
+    "#output_format-container .CodeMirror textarea",
+    challenge["Output Format"]
+  );
+  await tab.type("#tags_tag", challenge["Tags"]);
+  await tab.keyboard.press("Enter");
+  await tab.click(".save-challenge.btn.btn-green");
 }
 main();
