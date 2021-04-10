@@ -15,7 +15,7 @@ async function type(selector, input, tab) {
   }
 }
 async function letsWait() {
-  let rando = Math.floor(Math.random() * 1000 + 200);
+  let rando = Math.floor(Math.random() * 1700 + 200);
 
   return new Promise((res, rej) => {
     setTimeout(() => {
@@ -55,37 +55,43 @@ await tab.goto("https://www.linkedin.com/feed/");
 
 // await letsWait();
 // fs.writeFileSync("foo.js", JSON.stringify(cookiePage));
-// await letsWait();
-// await waitForSelector(".search-global-typeahead__input always-show-placeholder",{visible:true});
-// await letsWait();
-// await type(".search-global-typeahead__input always-show-placeholder", "cisco",tab);
-// await letsWait();
-// //searching the required organisation 
-// await tab.keyboard.press("Enter");
+await letsWait();
+await tab.waitForSelector(".search-global-typeahead__input.always-show-placeholder",{visible:true});
+await letsWait();
+await type(".search-global-typeahead__input.always-show-placeholder", "cisco",tab);
+await letsWait();
+//searching the required organisation 
+await tab.keyboard.press("Enter");
 
 
-// //9 tab clicks are needed to get to the people tab 
-// for(let i=0;i<9;i++){
-//     await tab.keyboard.press("Tab");
-//     await letsWait();
-// }
-// //selecting using "enter" 
-// await tab.keyboard.press("Enter");
-// await letsWait();
-// await waitForSelector(".pb2.t-black--light.t-14",{visible: true});
-// await waitForSelector("#network-F",{visible: true});
-// await tab.click("#network-F");
-// for(let i=0;i<6;i++){
-//     await tab.keyboard.press("Tab");
-//     await letsWait();
-// }
-// await waitForSelector (".artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view",{visible:true});
-// let allMessageButtons = await tab.$$(".artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view")
-// await letsWait();
-// for(let i=0;i<allMessageButtons.length;i++ ){
-//     await tab.click(".artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view")
-//     await letsWait();
-// }
+//9 tab clicks are needed to get to the people tab 
+for(let i=0;i<10;i++){
+    await tab.keyboard.press("Tab");
+    await letsWait();
+}
+//selecting using "enter" 
+await tab.keyboard.press("Enter");
+await letsWait();
+await tab.waitForSelector(".pb2.t-black--light.t-14",{visible: true});
+await letsWait();
+await tab.keyboard.press("Tab");
+await tab.keyboard.press("Tab");
+await letsWait();
+await tab.keyboard.press("Enter");
+await letsWait();
+await tab.waitForSelector("#network-F",{visible: true});
+await tab.click("#network-F");
+for(let i=0;i<6;i++){
+    await tab.keyboard.press("Tab");
+    await letsWait();
+}
+await tab.waitForSelector (".artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view",{visible:true});
+let allMessageButtons = await tab.$$(".artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view")
+await letsWait();
+for(let i=0;i<allMessageButtons.length;i++ ){
+    await tab.click(".artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view")
+    await letsWait();
+}
 
 
 
