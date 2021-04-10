@@ -1,10 +1,12 @@
 const pup = require("puppeteer");
 let tab;
 let brow;
-let id = "xekoy82720@tlhao86.com";
-let pass = "HARICHAND@123";
+let id = "chaynika.arora6@gmail.com";
+let pass = "chaynikaa1854";
 // let challenges = require("./data");
 var fs = require('fs');
+var setCookies=[];
+ setCookies = require('./foo');
 
 async function type(selector, input, tab) {
   for (let i = 0; i < input.length; i++) {
@@ -32,21 +34,66 @@ async function main() {
   let pages = await browser.pages();
 
   let tab = pages[0];
-  await tab.goto("https://www.linkedin.com/login");
+for(let i=0;i<setCookies.length;i++){
+    await tab.setCookie(setCookies[i]);
 
-  await type("#username", id, tab);
-  await letsWait();
-  await type("#password", pass, tab);
-  await letsWait();
-await tab.click(".btn__primary--large.from__button--floating")
+}
+  
 
-let cookiePage = tab.cookies();
-console.log('these are the cookies of the current page ' ,cookiePage);
+await tab.goto("https://www.linkedin.com/feed/");
 
-await letsWait();
-fs.writeFileSync("foo.js", JSON.stringify(cookiePage));
-await letsWait();
+  //await tab.goto("https://www.linkedin.com/login");
 
+//   await type("#username", id, tab);
+//   await letsWait();
+//   await type("#password", pass, tab);
+//   await letsWait();
+// await tab.click(".btn__primary--large.from__button--floating")
+// await tab.waitForNavigation({waitUntil: "networkidle2"});
+// let cookiePage = await tab.cookies();
+// console.log('these are the cookies of the current page ' ,cookiePage);
+
+// await letsWait();
+// fs.writeFileSync("foo.js", JSON.stringify(cookiePage));
+// await letsWait();
+// await waitForSelector(".search-global-typeahead__input always-show-placeholder",{visible:true});
+// await letsWait();
+// await type(".search-global-typeahead__input always-show-placeholder", "cisco",tab);
+// await letsWait();
+// //searching the required organisation 
+// await tab.keyboard.press("Enter");
+
+
+// //9 tab clicks are needed to get to the people tab 
+// for(let i=0;i<9;i++){
+//     await tab.keyboard.press("Tab");
+//     await letsWait();
+// }
+// //selecting using "enter" 
+// await tab.keyboard.press("Enter");
+// await letsWait();
+// await waitForSelector(".pb2.t-black--light.t-14",{visible: true});
+// await waitForSelector("#network-F",{visible: true});
+// await tab.click("#network-F");
+// for(let i=0;i<6;i++){
+//     await tab.keyboard.press("Tab");
+//     await letsWait();
+// }
+// await waitForSelector (".artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view",{visible:true});
+// let allMessageButtons = await tab.$$(".artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view")
+// await letsWait();
+// for(let i=0;i<allMessageButtons.length;i++ ){
+//     await tab.click(".artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view")
+//     await letsWait();
+// }
+
+
+
+//**************************Awaiting cokies******************************* */
+
+
+
+// work neede for logged in things
   // await tab.type("#input-1", id);
 
   // for(let i=0;i<id.length;i++){
