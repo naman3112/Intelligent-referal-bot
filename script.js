@@ -1,12 +1,8 @@
 const pup = require("puppeteer");
 let tab;
 let brow;
-// let id = "chaynika.arora6@gmail.com";
-// let pass = "chaynikaa1854";
-
-// let challenges = require("./data");
-let id = "namanarora311@gmail.com";
-let pass = "HARICHAND@123";
+let id = "##############";
+let pass = "##########";
 
 var fs = require("fs");
 var setCookies = [];
@@ -61,13 +57,9 @@ async function messageType(text, tab, elementSelector) {
 // let nextK = await tab.$(".msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view")
 
 await letsWait()
-
 await tab.mouse.click(1500,550,{button : 'left'});
 await letsWait();
 await letsWaitLong();
-
-
-//   await closeButton.click();
 }
 
 async function main() {
